@@ -7,7 +7,7 @@ const WordCloudDetails = function(data, wordCloudContainer) {
                     renderTo: this.wordCloudContainer
                     },
             title: {
-                    text: "Languages spoken in world wide countries"
+                    text: "Occurences of Languages spoken in world wide countries"
                     },
             series: [{
                       name: "Occurences",

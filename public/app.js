@@ -7,7 +7,7 @@ const app = function(){
 
 }
 
-make_request = function(url){
+const make_request = function(url){
   const request = new XMLHttpRequest();
   const countriesToReturn = [];
   request.open("GET", url);
@@ -16,7 +16,7 @@ make_request = function(url){
 
 }
 
-convertJSONToCountries = function(){
+const convertJSONToCountries = function(){
   if(this.status !== 200) return;
 
   const countries = JSON.parse(this.responseText);
@@ -24,7 +24,8 @@ convertJSONToCountries = function(){
 };
 
 
-populateLanguages = function(countries){
+const populateLanguages = function(countries){
+
   const languagesList = {};
   countries.forEach(function(country, index){
     const languages = country.languages;
@@ -58,7 +59,7 @@ populateLanguages = function(countries){
   const keys = Object.keys(languagesList);
 
   for (key of keys) {
-    // const languageHash = {};
+
     const language = key;
     const countryCount = languagesList[key].length
     languageHash = {
@@ -77,7 +78,76 @@ populateLanguages = function(countries){
 
   new WordCloud(wordCloudDetails.wordCloud);
 
-}
+  populateLanguagesDropdown(keys, languagesList, countries);
+};
 
+const populateLanguagesDropdown = function (keys, languagesList, countries) {
+
+  const dropdown = document.querySelector("#languages");
+  const languages = keys.sort();
+
+  languages.forEach(function (language, index) {
+    const option = document.createElement("option");
+    option.value = index;
+    option.innerText = language;
+    dropdown.appendChild(option);
+  });
+
+  const handleLanguageSelectChanged = function () {
+
+    document.getElementById('countries').innerText = null
+    document.getElementById('country-info').innerText = null
+    
+    const selectedLanguage = languages[this.value];
+
+    const countryIndices = languagesList[selectedLanguage];
+    console.log("countryIndices",countryIndices );
+    console.log("countries", countries);
+
+    populateLanguageCountriesDropDown(countryIndices, countries);
+
+  }
+  dropdown.addEventListener('change', handleLanguageSelectChanged);
+};
+
+const populateLanguageCountriesDropDown = function(countryIndices, countries){
+  const dropdown = document.querySelector("#countries");
+
+  const languageCountries = [];
+
+  countries.forEach(function(country, index){
+    if(countryIndices.includes(index)){
+      languageCountries.push(country);
+    }
+  });
+
+  languageCountries.forEach(function (country, index) {
+    const option = document.createElement("option");
+    option.value = index;
+    option.innerText = country.name;
+    dropdown.appendChild(option);
+  });
+
+  const handleCountrySelectChanged = function () {
+
+    const selectedCountry = languageCountries[this.value];
+
+    const ul = document.getElementById("country-info");
+    ul.innerHTML = "";
+    const name = document.createElement('li');
+    name.innerText = `Country name: ${selectedCountry.name}`
+    const population = document.createElement('li');
+    population.innerText = `Population: ${selectedCountry.population}`;
+    const capital = document.createElement('li');
+    capital.innerText = `Capital City: ${selectedCountry.capital}`;
+
+    ul.appendChild(name);
+    ul.appendChild(population);
+    ul.appendChild(capital);
+
+  }
+
+  dropdown.addEventListener('change', handleCountrySelectChanged);
+};
 
 document.addEventListener('DOMContentLoaded', app);
