@@ -51,7 +51,35 @@ populateLanguages = function(countries){
 
   }.bind(this));
 
-  console.log("languages", languagesList);
+  // Create word cloud
+  // create data array to pass to word cloud
+
+  let languagesDataArray = [];
+  const keys = Object.keys(languagesList);
+
+  for (key of keys) {
+    // const languageHash = {};
+    const language = key;
+    const countryCount = languagesList[key].length
+    languageHash = {
+      name: language,
+      weight: countryCount
+    }
+
+    languagesDataArray.push(languageHash);
+  }
+
+
+  console.log("languagesDataArray", languagesDataArray);
+
+  const wordCloudContainer    = document.querySelector("#word-cloud");
+
+  const wordCloudDetails    = new WordCloudDetails(languagesDataArray, wordCloudContainer);
+
+  // console.log("wordCloudDetails", wordCloudDetails);
+
+  new WordCloud(wordCloudDetails.wordCloud);
+
 }
 
 
