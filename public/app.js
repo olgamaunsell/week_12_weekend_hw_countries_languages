@@ -69,14 +69,11 @@ populateLanguages = function(countries){
     languagesDataArray.push(languageHash);
   }
 
-
   console.log("languagesDataArray", languagesDataArray);
 
   const wordCloudContainer    = document.querySelector("#word-cloud");
 
   const wordCloudDetails    = new WordCloudDetails(languagesDataArray, wordCloudContainer);
-
-  // console.log("wordCloudDetails", wordCloudDetails);
 
   new WordCloud(wordCloudDetails.wordCloud);
 
