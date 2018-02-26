@@ -64,7 +64,7 @@ const populateLanguages = function(countries){
     const countryCount = languagesList[key].length
     languageHash = {
       name: language,
-      weight: Math.log(countryCount) 
+      weight: Math.log(countryCount)
     }
 
     languagesDataArray.push(languageHash);
@@ -114,6 +114,13 @@ const populateLanguageCountriesDropDown = function(countryIndices, countries){
   const dropdown = document.querySelector("#countries");
 
   const languageCountries = [];
+
+  const defaultOption = document.createElement('option');
+  defaultOption.innerText = 'Select a country';
+  defaultOption.value = -1;
+  defaultOption.disabled = true;
+  defaultOption.selected = true;
+  dropdown.appendChild(defaultOption);
 
   countries.forEach(function(country, index){
     if(countryIndices.includes(index)){
