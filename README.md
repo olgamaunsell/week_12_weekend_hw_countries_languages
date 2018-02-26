@@ -29,6 +29,3 @@ In particular we recommend:
 <p align="left">
   <img src="screenshot1.png" width="550"/>
 </p>
-<p align="right">
-  <img src="screenshpt2.png" width="550"/>
-</p>
