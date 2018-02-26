@@ -26,5 +26,7 @@ In particular we recommend:
   - Harry Potter: http://hp-api.herokuapp.com/
   - MusixMatch: https://developer.musixmatch.com/ - get info on music charts, artists and their music, lyrics. Free API key when you sign up.
 
-!(../master/screenshot1.png)
-!(../master/screenshot1.png)
+<p align="center">
+  <img src="screenshot1.png" width="350"/>
+  <img src="screenshpt2.png" width="350"/>
+</p>
